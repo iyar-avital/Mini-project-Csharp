@@ -1,0 +1,54 @@
+﻿<Window x:Class="PLWPF.siteOwner_hostingUnits"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="siteOwner_hostingUnits" Height="1000" Width="1000">
+    <Grid>
+        <StackPanel Name="StackLists" Visibility="Visible" Orientation="Horizontal" Margin="0,0,-151.4,0.4">
+            <ListView x:Name="HostingUnitList" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="663" VerticalAlignment="Stretch" Width="993" Margin="0,275,0,32.4" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="key" Width="120" DisplayMemberBinding="{Binding HostingUnitKey}"/>
+                        <GridViewColumn Header="name" Width="120" DisplayMemberBinding="{Binding HostingUnitName}"/>
+                        <GridViewColumn Header="type" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Type}"/>
+                        <GridViewColumn Header="city" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.SubArea}"/>
+                        <GridViewColumn Header="pool" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Pool}"/>
+                        <GridViewColumn Header="Jacuzzi" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Jacuzzi}"/>
+                        <GridViewColumn Header="Garden" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Garden}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="OrderList" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="663" VerticalAlignment="Stretch" Width="996" Margin="0,275,0,32.4">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="key" Width="100" DisplayMemberBinding="{Binding OrderKey}"/>
+                        <GridViewColumn Header="Hosting unit Key" Width="160" DisplayMemberBinding="{Binding HostingUnitKey}"/>
+                        <GridViewColumn Header="Guest Request Key" Width="160" DisplayMemberBinding="{Binding GuestRequestKey}"/>
+                        <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                        <GridViewColumn Header="Create Date" Width="160" DisplayMemberBinding="{Binding CreateDate, StringFormat='dd/MM/yyyy'}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="GuestList" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="1000" VerticalAlignment="Stretch" Width="995" Margin="0,107,0,-136.6">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="key" Width="90" DisplayMemberBinding="{Binding GuestRequestKey }"/>
+                        <GridViewColumn Header="Guest Id" Width="120" DisplayMemberBinding="{Binding GuestId}"/>
+                        <GridViewColumn Header="Guest Request Key" Width="160" DisplayMemberBinding="{Binding GuestRequestKey}"/>
+                        <GridViewColumn Header="Entry Date" Width="100" DisplayMemberBinding="{Binding EntryDate, StringFormat='dd/MM/yyyy'}"/>
+                        <GridViewColumn Header="Release Date" Width="100" DisplayMemberBinding="{Binding ReleaseDate, StringFormat='dd/MM/yyyy'}"/>
+                        <GridViewColumn Header="type" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Type}"/>
+                        <GridViewColumn Header="city" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.SubArea}"/>
+                        <GridViewColumn Header="pool" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Pool}"/>
+                        <GridViewColumn Header="Jacuzzi" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Jacuzzi}"/>
+                        <GridViewColumn Header="Garden" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Garden}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>

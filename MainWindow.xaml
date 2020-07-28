@@ -1,0 +1,75 @@
+﻿<Window x:Class="PLWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowState="Maximized"
+        Title="Deli-Pecan" Height="450" Width="800" Icon="imagess/icon.jpg">
+    <Window.Resources>
+        <ControlTemplate x:Key="GuestTempn" TargetType="Button">
+            <Grid>
+                <Label Content="{Binding ElementName=guest, Path=Content}" Margin="42,10,0,0"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="HostTemp" TargetType="Button">
+            <Grid>
+                <Label Content="{Binding ElementName=hosting_unit, Path=Content}" Margin="42,10,0,0"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="SiteOwnerTemp" TargetType="Button">
+            <Grid>
+                <Label Content="{Binding ElementName=site_Owner, Path=Content}" Margin="42,10,0,0"/>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Foreground" Value="DeepPink"/>
+                    <Setter Property="FontSize" Value="27"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate x:Key="MoreList" TargetType="Button">
+            <StackPanel Orientation="Horizontal" Height="40" Width="249">
+                <Grid Width="26" Margin="0,6">
+                </Grid>
+                <TextBlock Text=" More" FontSize="28" Width="214" Margin="0,4,0,-4"/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-92">
+        <Grid.Background>
+            <ImageBrush ImageSource="imagess/logoyellow.jpg" Opacity="0.5">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="guest" Template="{StaticResource GuestTempn}" Style="{StaticResource buttonStyle}" Content="Guest" Margin="84,123,548,351" Click="guest_Click" Width="Auto"/>
+        <Button x:Name="hosting_unit" Template="{StaticResource HostTemp}" Style="{StaticResource buttonStyle}" Content="Host" Margin="84,189,491,285" Click="hosting_unit_Click" Width="Auto"/>
+        <Button x:Name="site_Owner" Template="{StaticResource SiteOwnerTemp}" Style="{StaticResource buttonStyle}" Content="Site Owner" Margin="84,259,518,215" Click="site_Owner_Click" Width="Auto"/>
+        <Button Template="{StaticResource close}" Style="{StaticResource buttonStyle}" Click="Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="715,28,37,375" RenderTransformOrigin="1.212,0.343" Height="39" Width="40"/>
+        <Label Content="Deli-Pecan" FontSize="40" HorizontalAlignment="Left" Margin="32,30,0,0" VerticalAlignment="Top" Width="406" FontStyle="Oblique" FontFamily="Segoe UI Black" Height="88"/>
+        <Button x:Name="MoreDetails" Template="{StaticResource MoreList}" Style="{StaticResource buttonStyle}" HorizontalAlignment="Left" Margin="114,336,0,144" Background="{x:Null}" Click="MoreDetails_Click" Height="Auto"/>
+    </Grid>
+</Window>

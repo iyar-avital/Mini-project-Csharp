@@ -1,0 +1,84 @@
+﻿<Window x:Class="PLWPF.Guest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowState="Maximized"
+        Title="Guest" Height="700" Width="1200">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="130"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate x:Key="AddGuestRequestTemp" TargetType="Button">
+            <StackPanel Orientation="Horizontal" Height="40" Width="249">
+                <Grid Width="30" Height="30" Margin="2,0,2,5">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="imagess/plus.png"/>
+                    </Grid.Background>
+                </Grid>
+                <TextBlock Text="  add Guest Request" FontSize="22" Width="214" Margin="0,4,0,-4"/>
+            </StackPanel>
+        </ControlTemplate>
+        <ControlTemplate x:Key="MoreList" TargetType="Button">
+            <StackPanel Orientation="Horizontal" Height="40" Width="249">
+                <Grid Width="26" Margin="0,6">
+                </Grid>
+                <TextBlock Text=" More" FontSize="28" Width="214" Margin="0,4,0,-4"/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+    <StackPanel Name="GuestGrid">
+        <Grid Name="Title" Height="104" Background="#FFEC04A2">
+            <Button Template="{StaticResource close}" Click="buttn_x_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,29,0" Height="39" Width="40"/>
+            <Label Content="Guest" FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Margin="36,30,0,0" VerticalAlignment="Top" Height="56" Width="670"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Grid Name="all_detailsGrid" Width="905" Height="722">
+                <Grid.Background>
+                    <ImageBrush ImageSource="imagess/guesy.jpg" Opacity="0.7"/>
+                </Grid.Background>
+                <Label Name="messageLog" Content="Log in to view all of your Request" FontSize="30" FontWeight="Bold" Margin="36,22,9,372" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="0.977"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0.733"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,2,0,-19">
+                    <ListView x:Name="GuestRequestList" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Guest Request key" Width="auto" DisplayMemberBinding="{Binding GuestRequestKey }"/>
+                                <GridViewColumn Header="Entry Date" Width="auto" DisplayMemberBinding="{Binding EntryDate, StringFormat='dd/MM/yyyy'}"/>
+                                <GridViewColumn Header="Release Date" Width="auto" DisplayMemberBinding="{Binding ReleaseDate, StringFormat='dd/MM/yyyy'}"/>
+                                <GridViewColumn Header="type" Width="auto" DisplayMemberBinding="{Binding Allguestrequestdetails.Type}"/>
+                                <GridViewColumn Header="city" Width="auto" DisplayMemberBinding="{Binding Allguestrequestdetails.SubArea}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+            <Grid Name="all_buttonGrid" Width="288">
+                <Button Name="LogOutButton" Content="Log Out" BorderBrush="Black" HorizontalAlignment="Left" Margin="62,0,0,672" VerticalAlignment="Bottom" Width="128" Height="34" Visibility="Collapsed" Click="LogOutButton_Click" RenderTransformOrigin="0.473,-4.515"/>
+                <Button Template="{StaticResource AddGuestRequestTemp}" Name="AddGuestRequestButton" HorizontalAlignment="Left" Margin="13,383,0,0" VerticalAlignment="Top" Click="Button_Add" Width="259"/>
+                <Button x:Name="MoreDetails" Template="{StaticResource MoreList}" IsEnabled="False"  HorizontalAlignment="Left" Margin="33,368,0,69" Width="130" Background="{x:Null}" Click="MoreDetails_Click"/>
+                <Grid Name="UserGrid" HorizontalAlignment="Left" Height="235" Margin="10,61,0,0" VerticalAlignment="Top" Width="266"/>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</Window>

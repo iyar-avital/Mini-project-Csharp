@@ -1,0 +1,104 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="PLWPF.SiteOwner"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+    WindowStyle="None"
+        Title="SiteOwner" Height="700" Width="1000">
+    <Window.Resources>
+        <ControlTemplate x:Key="purse" TargetType="Button">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="purse.png"/>
+                </Grid.Background>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <Grid Name="CloseGrid" Background="#FFFFEBC1">
+            <Button Template="{StaticResource close}" Click="buttn_x_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,9,17,0" Height="30" Width="30"/>
+        </Grid>
+        <Expander Name="StyleGrid" Header="Choose your style" Background="#FFFFEBC1">
+            <Grid Height="38">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="330*"/>
+                    <ColumnDefinition Width="331*"/>
+                    <ColumnDefinition Width="331*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="BackGround color" FontSize="20" Grid.Column="0" Margin="0,-4,77,4"/>
+                <xctk:ColorPicker Name="backGroundColor" Grid.Column="0" Margin="195,0,58,10" SelectedColorChanged="ColorPicker_SelectedColorChanged"/>
+                <Label Content="Buttons color" FontSize="20" Grid.Column="1" Margin="10,-4,67,4"/>
+                <xctk:ColorPicker Name="buttonColor" Grid.Column="1" Margin="174,0,90,10" SelectedColorChanged="ColorPicker_SelectedColorChanged_1"/>
+                <Label Content="Font color" FontSize="20" Grid.Column="2" HorizontalAlignment="Left" Width="119" Margin="0,-4,0,4"/>
+                <xctk:ColorPicker Name="fontColor" Grid.Column="2" Margin="119,0,134,10" SelectedColorChanged="fontColor_SelectedColorChanged"/>
+            </Grid>
+        </Expander>
+        <Grid Name="AllButtonGrid" Background="#FFFFEBC1" Height="680">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="buttonhunits" Content="All hosting units" FontSize="12" HorizontalAlignment="Left" Margin="413,26,0,0" VerticalAlignment="Top" Width="132" Click="HostingUnit_Click" Height="50" Background="#FFF3B021" BorderBrush="Black"/>
+            <Button Name="buttonhosts" Content="All hosts" FontSize="12" HorizontalAlignment="Left" Margin="234,26,0,0" VerticalAlignment="Top" Width="118" Click="Button_Click" Height="50" Background="#FFF3B021" BorderBrush="Black"/>
+            <Button Name="buttonOrders" Content="All orders" FontSize="12" HorizontalAlignment="Left" Margin="583,26,0,0" VerticalAlignment="Top" Width="128" Click="Orders_Click_1" Height="50" Background="#FFF3B021" BorderBrush="Black"/>
+            <Button Name="buttongRequest" Content="All Guest Requests" FontSize="12" HorizontalAlignment="Left" Height="50" Margin="763,26,0,0" VerticalAlignment="Top" Width="147" Click="GuestRequest_Click_2" Background="#FFF3B021" BorderBrush="Black"/>
+            <ListView x:Name="groupGuestRequest" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,138,-1,71" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="key" Width="90" DisplayMemberBinding="{Binding GuestRequestKey}"/>
+                        <GridViewColumn Header="Guest Id" Width="120" DisplayMemberBinding="{Binding GuestId}"/>
+                        <GridViewColumn Header="Entry Date" Width="120" DisplayMemberBinding="{Binding EntryDate, StringFormat=dd/MM/yyyy}"/>
+                        <GridViewColumn Header="Release Date" Width="120" DisplayMemberBinding="{Binding ReleaseDate, StringFormat=dd/MM/yyyy}"/>
+                        <GridViewColumn Header="type" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Type}"/>
+                        <GridViewColumn Header="city" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.SubArea}"/>
+                        <GridViewColumn Header="pool" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Pool}"/>
+                        <GridViewColumn Header="Jacuzzi" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Jacuzzi}"/>
+                        <GridViewColumn Header="Area" Width="90" DisplayMemberBinding="{Binding Allguestrequestdetails.Area}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="groupHost" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2,138,10,71" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="id" Width="90" DisplayMemberBinding="{Binding HostId}"/>
+                        <GridViewColumn Header="name" Width="120" DisplayMemberBinding="{Binding PrivateName}"/>
+                        <GridViewColumn Header="family name" Width="120" DisplayMemberBinding="{Binding FamilyName}"/>
+                        <GridViewColumn Header="phone" Width="100" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                        <GridViewColumn Header="mail" Width="140" DisplayMemberBinding="{Binding MailAdress}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="GroupHostingUnit" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,138,-1,71" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="key" Width="120" DisplayMemberBinding="{Binding HostingUnitKey}"/>
+                        <GridViewColumn Header="name" Width="120" DisplayMemberBinding="{Binding HostingUnitName}"/>
+                        <GridViewColumn Header="type" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Type}"/>
+                        <GridViewColumn Header="city" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.SubArea}"/>
+                        <GridViewColumn Header="pool" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Pool}"/>
+                        <GridViewColumn Header="Jacuzzi" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Jacuzzi}"/>
+                        <GridViewColumn Header="Garden" Width="90" DisplayMemberBinding="{Binding AllhostingUnitdetails.Garden}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="GroupOrder" Visibility="Collapsed" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,138,-1,71" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="key"  Width="120" DisplayMemberBinding="{Binding OrderKey}"/>
+                        <GridViewColumn Header="hosting Unit Key"  Width="150" DisplayMemberBinding="{Binding HostingUnitKey}"/>
+                        <GridViewColumn Header="guest Request Key" Width="150" DisplayMemberBinding="{Binding GuestRequestKey}"/>
+                        <GridViewColumn Header="status" Width="150" DisplayMemberBinding="{Binding Status}"/>
+                        <GridViewColumn Header="create Date" Width="120" DisplayMemberBinding="{Binding CreateDate, StringFormat='dd/MM/yyyy'}"/>
+                        <GridViewColumn Header="booking Fee" Width="120" DisplayMemberBinding="{Binding BookingFee}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button ToolTip="Image for illustrative purposes only, The money is really in shekels" Template="{StaticResource purse}" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Width="70" Click="Button_Click_5" Height="71">
+            </Button>
+        </Grid>
+    </StackPanel>
+
+</Window>

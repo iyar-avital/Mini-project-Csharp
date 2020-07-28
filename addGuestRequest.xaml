@@ -1,0 +1,111 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.addGuestRequest"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="addGuestRequest" Height="700" Width="1000" Loaded="Window_Loaded" WindowState="Maximized">
+    <Window.Resources>
+        <Style x:Key="all" TargetType="{x:Type Control}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="1.3"/>
+        </Style>
+        <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource all}">
+            <Setter Property="HidePromptOnLeave" Value="true"/>
+            <Setter Property="IncludeLiteralsInValue" Value="false"/>
+            <Setter Property="Tag" Value="false"/>
+        </Style>
+        <Style TargetType="{x:Type xctk:IntegerUpDown}" BasedOn="{StaticResource all}">
+            <Setter Property="Tag" Value="false"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <CollectionViewSource x:Key="guestRequestViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:GuestRequest}, CreateList=True}"/>
+        <CollectionViewSource x:Key="detailsViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Details}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid x:Name="addGuestRequestGrid" Margin="0,0,0,-65">
+        <Button Template="{StaticResource close}" Click="buttn_x_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Height="35" Width="35" Margin="0,39,53,0" RenderTransformOrigin="-0.486,1.543"/>
+        <Grid x:Name="grid1" Margin="61,36,517,144" HorizontalAlignment="Stretch" Width="314" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="110"/>
+                <ColumnDefinition Width="Auto" MinWidth="150"/>
+            </Grid.ColumnDefinitions>
+            <Button Template="{StaticResource close}" x:Name="buttn_x" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-1,-460,0" RenderTransformOrigin="1.212,0.343" Height="29" Width="30" Grid.Column="1" Click="buttn_x_Click"/>
+            <Label x:Name="guest_id" Grid.Row="0" Grid.Column="0" Content="Guest Id:" Height="25" Width="60" Margin="20,17,60,13"/>
+            <xctk:MaskedTextBox x:Name="guestIdMask" Width="120" SelectionStart="0" Mask="000000000" HidePromptOnLeave="False" Text="{Binding GuestId , UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Grid.Row="0" Height="25" Grid.Column="1" Margin="16,15,37,15" MaxLength="9" MaxLines="2147483636" LostFocus="guestIdMask_LostFocus"/>
+            <Label x:Name="entry_date" VerticalAlignment="Center" Grid.Row="4" Margin="16,18,0,20" HorizontalAlignment="Left" Grid.Column="0" Content="Entry Date:" Height="26" Width="68"/>
+            <DatePicker x:Name="entryDateDatePicker" VerticalAlignment="Center" Tag="false" SelectedDate="{Binding EntryDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="15,16,0,16" HorizontalAlignment="Left" Grid.Column="1" Height="24" Width="128" LostFocus="entryDateDatePicker_LostFocus"/>
+            <Label VerticalAlignment="Center" Grid.Row="2" Margin="19,19,0,20" HorizontalAlignment="Left" Grid.Column="0" Content="Family Name:" Height="26" Width="81"/>
+            <xctk:MaskedTextBox x:Name="family_NameMask" Width="120" SelectionStart="0" Text="{Binding Family_Name, UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="15,16,38,14" LostFocus="family_NameMask_LostFocus" />
+            <Label VerticalAlignment="Center" Grid.Row="3" Margin="16,19,0,20" HorizontalAlignment="Left" Grid.Column="0" Content="Mail Address:" Height="26" Width="81"/>
+            <xctk:MaskedTextBox x:Name="mailAddressMask" Width="120"  SelectionStart="0" Text="{Binding MailAddress, UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Grid.Row="3" Height="24" HorizontalAlignment="Left" Grid.Column="1" Margin="15,19,0,12" LostFocus="mailAddressMask_LostFocus"/>
+            <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Content="Private Name:" Height="25" Width="100"/>
+            <xctk:MaskedTextBox x:Name="private_NameMask" Width="120" VerticalAlignment="Center" Text="{Binding Private_Name,UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Grid.Row="1" Margin="15,15,0,16" Height="24" HorizontalAlignment="Left" Grid.Column="1" LostFocus="private_NameMask_LostFocus"/>
+            <Label x:Name="release_date" VerticalAlignment="Center" Grid.Row="5" Margin="16,20,0,19" HorizontalAlignment="Left" Grid.Column="0" Content="Release Date:" Height="26" Width="81"/>
+            <DatePicker x:Name="releaseDateDatePicker" Tag="false" VerticalAlignment="Center" SelectedDate="{Binding ReleaseDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="16,15,0,16" HorizontalAlignment="Left" Grid.Column="1" Height="24" Width="128" LostFocus="releaseDateDatePicker_LostFocus"/>
+            <Label x:Name="grAdults" Content="Adults:" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Height="24" Margin="18,23,157,23" Grid.ColumnSpan="2"/>
+            <xctk:IntegerUpDown x:Name="grAdultsUpDown" Minimum="0" Grid.Column="1" Grid.Row="6" Text="{Binding Allguestrequestdetails.Adults,UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Width="120" Margin="17,16,38,16" LostFocus="grAdultsUpDown_LostFocus" Height="24"/>
+            <Label x:Name="grChildren" Content="Children:" Grid.Column="0" HorizontalAlignment="Left" Margin="15,23,0,22" Grid.Row="7" VerticalAlignment="Center" Height="24" Width="55"/>
+            <xctk:IntegerUpDown x:Name="ChildrenUpDownn" Minimum="0" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="7" Text="{Binding Allguestrequestdetails.Children,UpdateSourceTrigger=LostFocus, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Margin="15,15,0,0" LostFocus="ChildrenUpDownn_LostFocus"/>
+            <Image x:Name="GuestIdError" Source="imagess/xRed.png" Grid.Column="1" Height="20" Margin="141,28,12,30" VerticalAlignment="Stretch" Grid.Row="0" Visibility="Collapsed" ToolTip="Id is incorrect" HorizontalAlignment="Center" Width="20"/>
+            <Image x:Name="grPrivateNameError" Source="imagess/xRed.png" Grid.Column="1" HorizontalAlignment="Stretch" Height="20" Margin="141,28,12,30" VerticalAlignment="Center" Width="20" Grid.Row="1" Visibility="Collapsed" ToolTip="Private Name is incorrect"/>
+            <Image x:Name="grFamilyNameError" Source="imagess/xRed.png" Grid.Column="1" HorizontalAlignment="Stretch" Height="20" Margin="141,19,12,17" VerticalAlignment="Center" Width="20" Grid.Row="2" Visibility="Collapsed" ToolTip="Family Name is incorrect"/>
+            <Image x:Name="grMailAddressError" Source="imagess/xRed.png" Grid.Column="1" HorizontalAlignment="Stretch" Height="20" Margin="139,32,14,26" VerticalAlignment="Center" Width="20" Grid.Row="3" Visibility="Collapsed" ToolTip="Mail Address is incorrect" RenderTransformOrigin="8.43,0.66"/>
+        </Grid>
+        <Grid x:Name="grid2" HorizontalAlignment="Stretch" Margin="407,36,85,84" VerticalAlignment="Stretch" Width="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="55*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="grArea" Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,14,0,18" Grid.Row="1" VerticalAlignment="Center" Height="24" Width="35"/>
+            <ComboBox x:Name="grAreaComboBox" Grid.Column="1" SelectedItem="{Binding Allguestrequestdetails.Area}" HorizontalAlignment="Left" Margin="15,16,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="25"/>
+            <Label x:Name="grChildrenAttractions" Content="Childrens Attractions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,16,0,16" Grid.Row="6" VerticalAlignment="Center" Height="24" Width="121"/>
+            <Label x:Name="grGarden" Content="Garden:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,16,0,16" Grid.Row="5" VerticalAlignment="Center" Height="24" Width="49"/>
+            <ComboBox x:Name="grGardenComboBox" Grid.Column="1" SelectedItem="{Binding Allguestrequestdetails.Garden}" HorizontalAlignment="Left" Margin="15,14,0,0" Grid.Row="5" VerticalAlignment="Top" Width="124" Height="28"/>
+            <Label x:Name="grAirCondition" Content="Air Conditioner:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,16,0,16" Grid.Row="8" VerticalAlignment="Center" Height="24" Width="91"/>
+            <CheckBox x:Name="grisAirConditionerCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Allguestrequestdetails.IsAirConditioner, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="15,18,0,20" Grid.Row="8" VerticalAlignment="Center" Height="18" Width="22"/>
+            <Label x:Name="grWifi" Content="Wifi:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,4" Grid.Row="7" VerticalAlignment="Bottom" Height="24" Width="31"/>
+            <CheckBox x:Name="grisWifiCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Allguestrequestdetails.IsWifi, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="15,0,0,9" Grid.Row="7" VerticalAlignment="Bottom" Height="18" Width="22"/>
+            <Label x:Name="grJacuzzi" Content="Jacuzzi:" Grid.Column="0" HorizontalAlignment="Left" Margin="5,16,0,4" Grid.Row="4" VerticalAlignment="Center" Height="36" Width="47"/>
+            <ComboBox x:Name="grJacuzziComboBox" Grid.Column="1" SelectedItem="{Binding Allguestrequestdetails.Jacuzzi}" HorizontalAlignment="Left" Margin="16,11,0,0" Grid.Row="4" VerticalAlignment="Top" Width="124" Height="28"/>
+            <Label x:Name="grPool" Content="Pool:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,16,0,16" Grid.Row="3" VerticalAlignment="Center" Height="24" Width="34"/>
+            <ComboBox x:Name="grPollComboBox" Grid.Column="1" SelectedItem="{Binding Allguestrequestdetails.Pool}" HorizontalAlignment="Left" Margin="15,19,0,11" Grid.Row="3" VerticalAlignment="Stretch" Width="127"/>
+            <Label x:Name="grSubArea" Content="Sub Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,16,0,16" Grid.Row="2" VerticalAlignment="Center" Height="24" Width="58"/>
+            <xctk:MaskedTextBox x:Name="grsubAreaMask" Grid.Column="1" SelectionStart="0" HorizontalAlignment="Left" Height="24" Margin="15,14,0,18" Grid.Row="2" Text="{Binding Allguestrequestdetails.SubArea , UpdateSourceTrigger=LostFocus, Mode=TwoWay}" VerticalAlignment="Center" Width="120" LostFocus="grsubAreaMask_LostFocus"/>
+            <Label x:Name="grtype" Content="Type:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,16,0,16" Grid.Row="0" VerticalAlignment="Center" Height="24" Width="35"/>
+            <ComboBox x:Name="grTypeComboBox" Grid.Column="1" HorizontalAlignment="Left" SelectedItem="{Binding Allguestrequestdetails.Type}" Margin="15,12,0,16" Height="28" Width="122"/>
+            <ComboBox x:Name="grChildrenAttractionsComboBox" Grid.Column="1" SelectedItem="{Binding Allguestrequestdetails.ChildrensAttractions}" HorizontalAlignment="Left" Margin="15,14,0,0" Grid.Row="6" VerticalAlignment="Top" Width="123" Height="28"/>
+            <Button x:Name="Add" Content="add Request" Foreground="Black" BorderBrush="Black" Click="Add_Click" Grid.Row="9" Background="{x:Null}" Margin="75,38,42,26" Grid.ColumnSpan="2" Height="Auto"/>
+            <Image x:Name="grSubAreaError" Source="imagess/xRed.png" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="141,14,-18,0" VerticalAlignment="Top" Width="20" Grid.Row="2" Visibility="Collapsed" ToolTip="Sub Area is incorrect"/>
+            <Image x:Name="grAdultsError" Source="imagess/xRed.png" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="136,13,-13,0" VerticalAlignment="Top" Width="20" Grid.Row="3" Visibility="Collapsed" ToolTip="Id is incorrect"/>
+        </Grid>
+    </Grid>
+</Window>
