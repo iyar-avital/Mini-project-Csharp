@@ -1,0 +1,41 @@
+﻿<Window x:Class="PLWPF.closeOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="closeOrder" Height="400" Width="500">
+    <Window.Resources>
+        <ControlTemplate x:Key="closeOrder" TargetType="Button">
+            <Grid>
+                <Label Content="     Close" FontSize="18" FontStyle="Oblique" FontFamily="Segoe UI Black"/>
+            </Grid>
+        </ControlTemplate>
+        <DataTemplate x:Key="key_date" x:Name="Key_date" DataType="HostingUnit">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="{Binding Path= OrderKey}"/>
+                <Label Name="Datush" Grid.Column="1" Content="{Binding Path= CreateDate}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid x:Name="gridCloseOrder" Margin="1,0,-3,-8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="imagess/reka.jpg" Opacity="0.6"/>
+        </Grid.Background>
+        <ComboBox HorizontalAlignment="Left" Name="closeComboBox" ItemTemplate="{StaticResource key_date}"  VerticalAlignment="Top" ItemsSource="{Binding}" Width="186" Height="38" Margin="236,132,0,0" SelectionChanged="closeComboBox_SelectionChanged"/>
+        <Label Content="Choose an order you want to close" FontSize="20" HorizontalAlignment="Left" Margin="106,72,0,0" VerticalAlignment="Top" Width="406" FontStyle="Oblique" FontFamily="Segoe UI Black" Height="40"/>
+        <RadioButton x:Name="radio1" Content="Closed successfully" FontSize="15" Visibility="Collapsed" HorizontalAlignment="Left" Margin="251,199,0,0" VerticalAlignment="Top" Checked="radio1_Checked"/>
+        <RadioButton x:Name="radio2" Content="Not relevant" FontSize="15" HorizontalAlignment="Left" Visibility="Collapsed" Margin="251,232,0,0" VerticalAlignment="Top" Checked="radio2_Checked"/>
+        <Button Template="{StaticResource close}" Click="buttn_x_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Height="35" Width="35" Margin="0,16,30,0" RenderTransformOrigin="-2.829,0.557"/>
+        <Button Name="closush" Template="{StaticResource closeOrder}" HorizontalAlignment="Left" Margin="260,284,0,0" Visibility="Collapsed" VerticalAlignment="Top" Width="126" Click="Button_Click_1" Height="42" RenderTransformOrigin="0.452,1.671"/>
+    </Grid>
+</Window>

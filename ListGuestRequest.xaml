@@ -1,0 +1,54 @@
+﻿<Window x:Class="PLWPF.ListGuestRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowState="Maximized"
+        Title="ListGuestRequest" Height="700" Width="1200">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid Background="#FFFFF69A">
+                <Button Template="{StaticResource close}" Click="buttn_x_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,9,29,0" Height="30" Width="30"/>
+            </Grid>
+            <Expander Header="Filtering Guest Request by:" FontWeight="Bold" Background="#FFFFF69A">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Area:" FontWeight="Normal" />
+                    <ComboBox x:Name="AreaCombobox" Width="102" Margin="3" SelectionChanged="AreaCombobox_SelectionChanged"/>
+                    <Button x:Name="AreaClear" BorderBrush="Orange" Visibility="Hidden" Content="Clear" Foreground="Black" FontSize="10" Background="White" Margin="5" Height="20" Click="AreaClear_Click"/>
+                    <Label Content="Number of People:" FontWeight="Normal" />
+                    <ComboBox x:Name="NumPepoleCombobox" Width="102" Margin="3" SelectionChanged="NumPepoleCombobox_SelectionChanged"/>
+                    <Button x:Name="NumPepoleClear" BorderBrush="Orange" Visibility="Hidden" Content="clear" Foreground="Black" FontSize="10" Background="White" Margin="5" Height="20" Click="NumPepoleClear_Click"/>
+                    <Label Content="Status of Request:" FontWeight="Normal" />
+                    <ComboBox x:Name="StatusCombobox" Width="102" Margin="3" SelectionChanged="StatusCombobox_SelectionChanged"/>
+                    <Button x:Name="StatusClear" BorderBrush="Orange" Visibility="Hidden" Content="clear" Foreground="Black" FontSize="10" Background="White" Margin="5" Height="20" Click="StatusClear_Click"/>
+                </StackPanel>
+            </Expander>
+
+            <DataGrid x:Name="GuestRequestGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto"  AutoGenerateColumns="False" ItemsSource="{Binding}" RowHeight="50" IsReadOnly="True" Grid.Row="1" Margin="2,0,-2,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Key" Width="auto" Binding="{Binding GuestRequestKey}"/>
+                    <DataGridTextColumn Header="Status" Width="auto" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Header="First Date" Binding="{Binding EntryDate, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Last Date" Binding="{Binding ReleaseDate, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Area" Width="auto" Binding="{Binding Allguestrequestdetails.Area}"/>
+                    <DataGridTextColumn Header="Adults" Binding="{Binding Allguestrequestdetails.Adults}"/>
+                    <DataGridTextColumn Header="Children" Binding="{Binding Allguestrequestdetails.Children}"/>
+                    <DataGridTextColumn Header="Pool" Width="auto" Binding="{Binding Allguestrequestdetails.Pool}"/>
+                    <DataGridTextColumn Header="Jacuzzi" Width="auto" Binding="{Binding Allguestrequestdetails.Jacuzzi}"/>
+                    <DataGridTextColumn Header="Garden" Width="auto" Binding="{Binding Allguestrequestdetails.Garden}"/>
+                    <DataGridTextColumn Header="Childrens Attractions" Width="auto" Binding="{Binding Allguestrequestdetails.ChildrensAttractions}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button x:Name="allDatailsButton" Content="all about" HorizontalAlignment="Center" Width="auto" Height="auto" Margin="3" BorderBrush="White" Background="Orange" Click="allDatails_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>
